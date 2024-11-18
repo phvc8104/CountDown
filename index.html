@@ -6,25 +6,27 @@
         margin: 100px;
         background-image: url(wallpaper.png);
         color: white;
-
     }
 
-    #countdown {
+    #countdown,
+    #countdown-noel {
         font-size: 30px;
         border: 2px solid #d8d8d8;
         padding: 20px;
         border-radius: 10px;
         display: inline-block;
+        margin-top: 20px;
     }
 </style>
 
 <body>
-    <h1>Còn bao nhiêu ngày nữa tới tết </h1>
+    <h1>Còn bao nhiêu ngày nữa tới Tết</h1>
     <div id='countdown'></div>
-</body>
-<script>setInterval('countdown()', 1000);
 
-</script>
+    <h1>Còn bao nhiêu ngày nữa tới Noel</h1>
+    <div id='countdown-noel'></div>
+</body>
+
 <script>
     function countdown() {
         let ed = "2025-01-29";
@@ -32,7 +34,7 @@
         let endDate = new Date(ed);
         let now = new Date();
 
-        let miligiay = (endDate - now);
+        let miligiay = endDate - now;
 
         let sogiay = Math.floor((miligiay / 1000) % 60);
         let sophut = Math.floor((miligiay / 1000 / 60) % 60);
@@ -45,6 +47,32 @@
                     <span><b>${sogiay}</b> giây</span>`;
 
         document.getElementById("countdown").innerHTML = str;
-
     }
+
+    function countdownNoel() {
+        let edNoel = "2024-12-25";
+
+        let endDateNoel = new Date(edNoel);
+        let now = new Date();
+
+        let miligiay = endDateNoel - now;
+
+        let sogiay = Math.floor((miligiay / 1000) % 60);
+        let sophut = Math.floor((miligiay / 1000 / 60) % 60);
+        let sogio = Math.floor((miligiay / 1000 / 60 / 60) % 24);
+        let songay = Math.floor(miligiay / 1000 / 60 / 60 / 24);
+
+        let str = `<span><b>${songay}</b> ngày</span>
+                    <span><b>${sogio}</b> giờ</span>
+                    <span><b>${sophut}</b> phút</span>
+                    <span><b>${sogiay}</b> giây</span>`;
+
+        document.getElementById("countdown-noel").innerHTML = str;
+    }
+
+    // Cập nhật cả hai đếm ngược mỗi giây
+    setInterval(() => {
+        countdown();
+        countdownNoel();
+    }, 1000);
 </script>
